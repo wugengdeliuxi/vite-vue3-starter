@@ -1,4 +1,5 @@
 import { mount } from '@vue/test-utils'
+// @ts-ignore
 import Test from '../src/views/Test.vue'
 
 test('Test.vue', async () => {
