@@ -17,18 +17,15 @@ module.exports = {
   },
   plugins: ['vue', '@typescript-eslint', 'html'],
   rules: {
+    'no-console': 'off',
+    'no-shadow': 'off',
+    'no-param-reassign': 'off',
     'import/no-unresolved': 'off',
+    'import/prefer-default-export': 'off',
     'import/extensions': 'off',
     'import/no-absolute-path': 'off',
     'import/no-extraneous-dependencies': 'off',
-    'vue/no-multiple-template-root': 'off',
-    'no-param-reassign': [
-      'error',
-      {
-        props: true,
-        ignorePropertyModificationsFor: ['state', 'config']
-      }
-    ]
+    'vue/no-multiple-template-root': 'off'
   },
   settings: {}
 }

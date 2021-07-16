@@ -1,22 +1,24 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-import Home from '@/views/home.vue'
-import Vuex from '@/views/vuex.vue'
+import Layout from '@/layout/index.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: '/table',
+    name: 'Table',
+    redirect: '/table/index',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Index',
+        component: () => import(/* webpackChunkName: "async" */ '@/views/table/index.vue')
+      }
+    ]
   },
   {
-    path: '/vuex',
-    name: 'Vuex',
-    component: Vuex
-  },
-  {
-    path: '/axios',
-    name: 'Axios',
-    component: () => import('@/views/axios.vue') // 懒加载组件
+    path: '/login',
+    name: 'Login',
+    component: () => import(/* webpackChunkName: "async" */ '@/views/login/index.vue')
   }
 ]
 

@@ -1,0 +1,32 @@
+/* 改变主题色变量 */
+$--color-primary: $blue;
+$input-color: $blue;
+$disabled-color: #f5f7fa;
+$--color-text-placeholder: #ccc !default;
+$--font-color-disabled-base: #333 !default;
+
+$--background-color-base: #f5f7fa !default;
+/* 一级边框颜色 */
+$--border-color-base: #c4cbda !default;
+
+$--radio-button-disabled-checked-fill: #333 !default;
+$--select-option-disabled-color: #333 !default;
+$--input-fill-disabled: #333 !default;
+$--input-disabled-color: #333 !default;
+
+// hover时border颜色
+$--border-color-hover: $--color-primary !default;
+$--select-border-color-hover: $--border-color-hover !default;
+// 获取焦点（输入时）border的颜色
+$--select-input-focus-border-color: $input-color !default;
+$--select-input-focus-border-color: $--color-primary !default;
+$--input-focus-border: $input-color !default;
+
+$--select-option-selected-hover: #ebf5ff !important;
+$--select-option-hover-background: #ebf5ff !default;
+$--select-option-selected-font-color: $--color-primary !default;
+$--select-option-selected-hover: $--color-primary !default;
+
+/* 改变 icon 字体路径变量，必需 */
+$--font-path: 'node_modules/element-plus/lib/theme-chalk/fonts';
+@import "node_modules/element-plus/packages/theme-chalk/src/index";

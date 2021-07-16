@@ -1,30 +1,14 @@
 # Vue 3 + Typescript + Vite
-
 This template should help get you started developing with Vue 3 and Typescript in Vite.
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur). Make sure to enable `vetur.experimental.templateInterpolationService` in settings!
-
-### If Using `<script setup>`
-
-[`<script setup>`](https://github.com/vuejs/rfcs/pull/227) is a feature that is currently in RFC stage. To get proper IDE support for the syntax, use [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) instead of Vetur (and disable Vetur).
-
-## Type Support For `.vue` Imports in TS
-
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can use the following:
-
-### If Using Volar
-
-Run `Volar: Switch TS Plugin on/off` from VSCode command palette.
-
-### If Using Vetur
-
-1. Install and add `@vuedx/typescript-plugin-vue` to the [plugins section](https://www.typescriptlang.org/tsconfig#plugins) in `tsconfig.json`
-2. Delete `src/shims-vue.d.ts` as it is no longer needed to provide module info to Typescript
-3. Open `src/main.ts` in VSCode
-4. Open the VSCode command palette
-5. Search and run "Select TypeScript version" -> "Use workspace version"
+### 前置知识
+1.ts (https://www.typescriptlang.org/zh/)
+2.vue3.0 (https://v3.cn.vuejs.org/)
+3.vite配置 (https://cn.vitejs.dev/)
+4.Airbnb JavaScript 风格指南 - 中文版 (https://github.com/lin-123/javascript)
+5.Prettier (https://prettier.io/)
+6.ESLint (https://eslint.org/)
+7.Element Plus (https://element-plus.org/#/zh-CN)
 
 ### 目录结构规范
 ├── publish/

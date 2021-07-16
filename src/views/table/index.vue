@@ -1,19 +1,14 @@
 <template>
-  <div id="app">
-    <router-view />
-  </div>
+  <div>111</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'App'
+  name: 'Table',
+  setup() {}
 })
 </script>
 
-<style>
-#app {
-  height: 100%;
-}
-</style>
+<style lang="scss" scoped></style>
