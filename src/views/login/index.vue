@@ -111,8 +111,6 @@ export default defineComponent({
     const handleLogin = () => {
       ;(loginFormRef.value as IElFormInstance).validate((valid) => {
         if (valid) {
-          console.log(2222)
-          console.log(store)
           loading.value = true
           store
             .dispatch('user/login', loginState.loginForm)

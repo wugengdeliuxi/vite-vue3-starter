@@ -40,7 +40,9 @@ const mutations: MutationTree<ITagsViewState> = {
   // 可删除指定的一个view缓存
   DEL_CACHED_VIEW(state, view) {
     const index = state.cachedViews.indexOf(view.name)
-    index > -1 && state.cachedViews.splice(index, 1)
+    if (index > -1) {
+      state.cachedViews.splice(index, 1)
+    }
   },
   // 清空可显示列表
   DEL_ALL_VISITED_VIEWS(state) {

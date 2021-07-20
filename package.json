@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "vite build",
     "serve": "vite preview",
     "prepare": "husky install",
     "test": "jest"
@@ -13,8 +13,9 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "element-plus": "^1.0.2-beta.36",
+    "element-plus": "1.0.2-beta.54",
     "good-storage": "^1.1.1",
+    "nprogress": "^0.2.0",
     "path-to-regexp": "^6.2.0",
     "vue": "^3.0.5",
     "vue-router": "^4.0.6",
@@ -24,9 +25,10 @@
   "devDependencies": {
     "@types/good-storage": "^1.1.0",
     "@types/jest": "^26.0.22",
+    "@types/nprogress": "^0.2.0",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
-    "@vitejs/plugin-vue": "^1.2.2",
+    "@vitejs/plugin-vue": "^1.2.5",
     "@vue/compiler-sfc": "^3.0.5",
     "@vue/test-utils": "^2.0.0-rc.6",
     "commitizen": "^4.2.3",
@@ -45,7 +47,7 @@
     "less": "^4.1.1",
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",
-    "sass": "^1.32.6",
+    "sass": "^1.35.2",
     "sass-loader": "^8.0.2",
     "ts-jest": "^26.5.5",
     "typescript": "^4.1.3",

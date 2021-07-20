@@ -1,7 +1,8 @@
-import { Size } from '@/plugins/element'
+// import { Size } from '@/plugins/element'
 import { ActionTree, Module, MutationTree } from 'vuex'
 import { IRootState } from '../index'
 
+export type Size = 'default' | 'medium' | 'small' | 'mini'
 // 定义app里state类型
 export interface IAppState {
   sidebar: {

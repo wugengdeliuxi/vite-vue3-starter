@@ -60,10 +60,9 @@ export default defineComponent({
     const isCollapse = computed(() => !store.getters.sidebar.opened)
 
     // 获取权限菜单
-    const menuList = computed(() => store.state.menu.authMenuTreeData)
-
+    const menuList = computed(() => store.state.permission.routes)
     // 渲染路由
-    const menuRoutes = computed(() => ([...menuList.value] as unknown[]) as RouteRecordRaw[])
+    const menuRoutes = computed(() => [...menuList.value] as unknown[] as RouteRecordRaw[])
 
     // 获取主题色
     const themeColor = computed(() => store.getters.themeColor)

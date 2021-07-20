@@ -29,7 +29,7 @@ interface ISettings {
 const mutations: MutationTree<ISettingsState> = {
   CHANGE_SETTING(state, { key, value }: ISettings) {
     if (key in state) {
-      ; (state[key] as ValueOf<ISettingsState>) = value
+      ;(state[key] as ValueOf<ISettingsState>) = value
     }
   }
 }

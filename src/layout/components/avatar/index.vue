@@ -9,7 +9,7 @@
         <el-dropdown-item v-if="username">
           <span style="display: block" :style="{ fontWeight: 500 }">用户名：{{ username }}</span>
         </el-dropdown-item>
-        <router-link to="/">
+        <!-- <router-link to="/">
           <el-dropdown-item>首页</el-dropdown-item>
         </router-link>
         <router-link to="/profile/index">
@@ -17,7 +17,7 @@
         </router-link>
         <router-link to="/profile/index">
           <el-dropdown-item> <i class="el-icon-setting" />设置</el-dropdown-item>
-        </router-link>
+        </router-link> -->
         <el-dropdown-item divided @click="logout">
           <span style="display: block">退出登录</span>
         </el-dropdown-item>
@@ -27,10 +27,9 @@
 </template>
 
 <script lang="ts">
-import defaultAvatar from '@/assets/logo.png'
+import defaultAvatar from '@/assets/avatar.jpg'
 import { defineComponent, getCurrentInstance, computed, ref } from 'vue'
 import { useStore } from '@/store'
-import { getAvatarImg } from '@/api/other'
 
 export default defineComponent({
   setup() {
@@ -38,7 +37,7 @@ export default defineComponent({
     const { proxy } = getCurrentInstance()!
     const logout = () => {
       store.dispatch('user/logout').then(() => {
-        proxy?.$message.success('退出登录')
+        ;(proxy as any).$message.success('退出登录')
         window.location.reload()
       })
     }

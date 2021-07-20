@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 <template>
   <div class="tags-view-container">
     <scroll-panel>
@@ -49,16 +50,9 @@ import { defineComponent, computed, watch, onMounted, nextTick } from 'vue'
 import { useRoute, RouteRecordRaw, useRouter } from 'vue-router'
 import { useStore } from '@/store'
 import { RouteLocationWithFullPath } from '@/store/modules/tagsView'
-// import { routes } from '@/router'
+import { routes } from '@/router'
 import ScrollPanel from '@/components/ScrollPanel/index.vue'
-
-// 右键菜单
-// enum TagCommandType {
-//   All = 'all',
-//   Other = 'other',
-//   Self = 'self',
-//   Refresh = 'refresh'
-// }
+import { TagCommandType } from './type'
 
 export default defineComponent({
   name: 'TagsView',
@@ -146,15 +140,11 @@ export default defineComponent({
       const lastView = visitedViews[visitedViews.length - 1]
       if (lastView) {
         router.push(lastView.fullPath as string)
+      } else if (view.name === 'Dashboard') {
+        router.replace({ path: `/redirect${view.fullPath}` as string })
       } else {
-        // 集合中都没有tag view时
-        // 如果刚刚删除的正是Dashboard 就重定向回Dashboard（首页）
-        if (view.name === 'Dashboard') {
-          router.replace({ path: `/redirect${view.fullPath}` as string })
-        } else {
-          // tag都没有了 删除的也不是Dashboard 只能跳转首页
-          router.push('/')
-        }
+        // tag都没有了 删除的也不是Dashboard 只能跳转首页
+        router.push('/')
       }
     }
 
@@ -172,23 +162,6 @@ export default defineComponent({
     // 是否是始终固定在tagsview上的tag
     const isAffix = (tag: RouteLocationWithFullPath) => {
       return tag.meta && tag.meta.affix
-    }
-
-    // 右键菜单
-    const handleTagCommand = (command: TagCommandType, view: RouteLocationWithFullPath) => {
-      switch (command) {
-        case TagCommandType.All: // 右键删除标签导航所有tag 除了affix为true的
-          handleCloseAllTag(view)
-          break
-        case TagCommandType.Other: // 关闭其他tag 除了affix为true的和当前右键的tag
-          handleCloseOtherTag(view)
-          break
-        case TagCommandType.Self: // 关闭当前右键的tag affix为true的tag下拉菜单中无此项
-          closeSelectedTag(view)
-          break
-        case TagCommandType.Refresh: // 刷新当前右键选中tag对应的路由
-          refreshSelectedTag(view)
-      }
     }
 
     // 删除所有tag 除了affix为true的
@@ -219,6 +192,26 @@ export default defineComponent({
           router.replace(`/redirect${fullPath}`)
         })
       })
+    }
+
+    // 右键菜单
+    const handleTagCommand = (command: TagCommandType, view: RouteLocationWithFullPath) => {
+      switch (command) {
+        case TagCommandType.All: // 右键删除标签导航所有tag 除了affix为true的
+          handleCloseAllTag(view)
+          break
+        case TagCommandType.Other: // 关闭其他tag 除了affix为true的和当前右键的tag
+          handleCloseOtherTag(view)
+          break
+        case TagCommandType.Self: // 关闭当前右键的tag affix为true的tag下拉菜单中无此项
+          closeSelectedTag(view)
+          break
+        case TagCommandType.Refresh: // 刷新当前右键选中tag对应的路由
+          refreshSelectedTag(view)
+          break
+        default:
+          break
+      }
     }
 
     // 获取主题色

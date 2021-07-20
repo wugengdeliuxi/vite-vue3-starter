@@ -1,17 +1,20 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '@/layout/index.vue'
 
-const routes: Array<RouteRecordRaw> = [
+export const routes: Array<RouteRecordRaw> = [
   {
-    path: '/table',
-    name: 'Table',
-    redirect: '/table/index',
+    path: '/',
+    redirect: '/table',
     component: Layout,
     children: [
       {
-        path: 'index',
-        name: 'Index',
-        component: () => import(/* webpackChunkName: "async" */ '@/views/table/index.vue')
+        path: 'table',
+        name: 'Table',
+        component: () => import(/* webpackChunkName: "async" */ '@/views/table/index.vue'),
+        meta: {
+          title: '基础表单',
+          icon: 'user'
+        }
       }
     ]
   },

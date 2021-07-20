@@ -4,15 +4,15 @@
     <!-- <breadcrumb /> -->
     <div class="right-menu">
       <!-- 设置 -->
-      <div @click="openShowSetting" class="setting right-menu-item hover-effect">
+      <!-- <div @click="openShowSetting" class="setting right-menu-item hover-effect">
         <i class="el-icon-s-tools"></i>
-      </div>
+      </div> -->
       <!-- 全屏 -->
       <!-- <screenfull id="screefull" class="right-menu-item hover-effect" /> -->
       <!-- element组件size切换 -->
-      <el-tooltip content="Global Size" effect="dark" placement="bottom">
-        <!-- <size-select class="right-menu-item hover-effect" /> -->
-      </el-tooltip>
+      <!-- <el-tooltip content="Global Size" effect="dark" placement="bottom"> -->
+      <!-- <size-select class="right-menu-item hover-effect" /> -->
+      <!-- </el-tooltip> -->
       <!-- 用户头像 -->
       <avatar />
     </div>

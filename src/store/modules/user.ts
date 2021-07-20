@@ -1,7 +1,7 @@
 import { Module, MutationTree, ActionTree } from 'vuex'
 import { IRootState } from '@/store'
 // import { getUserInfo, getUsers, login, addUser, updateUser, removeUser } from '@/api/user'
-import { login } from '@/api/user'
+import { getUserInfo, login } from '@/api/user'
 import { setToken, removeToken, getToken } from '@/utils/auth'
 
 // login params
@@ -10,24 +10,28 @@ export interface IUserInfo {
   password: string
 }
 
-interface Role {
-  id: number
-  name: string
-  description: string
+export interface Role {
+  created_at: number
+  item_name: string
+  roleName: string
+  user_id: string
 }
 
 export interface Profile {
   avatar: string
-  email: string
+  department?: string[]
+  departmentName?: string[]
+  district?: number
   id: number
-  isSuper: boolean
-  mobile: string
-  status: boolean
-  username: string
-  description: string
+  level: number
+  name: string
+  phone?: string
+  rights: string[]
   createdAt?: string
-  roles: Role[]
-  roleIds?: number[]
+  role: Role[]
+  street?: string
+  token: string
+  username?: string
 }
 
 // 定义state类型
@@ -125,7 +129,7 @@ const actions: IActions = {
       removeToken()
       resolve()
     })
-  }
+  },
   // getAllUsers({ commit }, params: IUserQuery = {}) {
   //   return new Promise<void>((resolve, reject) => {
   //     getUsers(params)
@@ -186,19 +190,19 @@ const actions: IActions = {
   //       .catch(reject)
   //   })
   // },
-  // getUserInfo({ commit }) {
-  //   return new Promise((resolve, reject) => {
-  //     getUserInfo()
-  //       .then((response) => {
-  //         const { data } = response
-  //         const { roles, ...info } = data
-  //         commit('SET_USER_INFO', info)
-  //         commit('SET_ROLES', roles)
-  //         resolve(roles)
-  //       })
-  //       .catch(reject)
-  //   })
-  // }
+  getUserInfo({ commit }) {
+    return new Promise((resolve, reject) => {
+      getUserInfo()
+        .then((response) => {
+          const { data } = response
+          const { role, ...info } = data
+          commit('SET_USER_INFO', info)
+          commit('SET_ROLES', role)
+          resolve(role)
+        })
+        .catch(reject)
+    })
+  }
 }
 
 // 定义user module

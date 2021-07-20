@@ -8,7 +8,7 @@
       >
         <el-menu-item :index="resolvePath(theOnlyOneChildRoute.path)">
           <i v-if="icon && icon.includes('el-icon')" :class="icon"></i>
-          <svg-icon v-else-if="icon" class="menu-icon" :icon-class="icon"></svg-icon>
+          <svg-icon v-else-if="icon" class="menu-icon" :name="icon"></svg-icon>
           <template #title>
             <span>{{ theOnlyOneChildRoute.meta.title }}</span>
           </template>
@@ -22,7 +22,7 @@
         <svg-icon
           v-else-if="item.meta && item.meta.icon"
           class="menu-icon"
-          :icon-class="item.meta.icon"
+          :name="item.meta.icon"
         ></svg-icon>
         <span v-if="item.meta" class="submenu-title">{{ item.meta.title || item.name }}</span>
       </template>
@@ -41,16 +41,18 @@
 </template>
 
 <script lang="ts">
-import path from 'path'
+// import path from 'path'
 import { defineComponent, PropType, computed, toRefs } from 'vue'
 import { isExternal } from '@/utils/validate'
 import { RouteRecordRaw } from 'vue-router'
+import SvgIcon from '@/components/SvgIcon/index.vue'
 import SidebarItemLink from './SidebarItemLink.vue'
 
 export default defineComponent({
   name: 'SidebarItem',
   components: {
-    SidebarItemLink
+    SidebarItemLink,
+    SvgIcon
   },
   props: {
     item: {
@@ -117,7 +119,8 @@ export default defineComponent({
         return childPath
       }
       // 如果不是外链 需要和basePath拼接
-      return path.resolve(props.basePath, childPath)
+      return props.basePath + childPath
+      // return path.resolve(props.basePath, childPath)
     }
 
     // 设置 alwaysShow: true，这样它就会忽略上面定义的规则，一直显示根路由 哪怕只有一个子路由也会显示为嵌套的路由菜单

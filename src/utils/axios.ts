@@ -10,10 +10,10 @@ const service = axios.create({
 
 service.interceptors.request.use(
   (config) => {
-    console.log(3333)
     const token = getToken()
     if (token) {
       // 携带token
+      config.params = { ...config.params, token }
       config.headers.Authorization = token
     }
     return config
@@ -25,11 +25,11 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
   (response) => {
-    const { code, message } = response.data
-    if (code !== 0) {
+    const { code, msg } = response.data
+    if (code !== 200) {
       // 错误提示
-      ElMessage.error(message)
-      return Promise.reject(message)
+      ElMessage.error(msg)
+      return Promise.reject(msg)
     }
     return response.data
   },

@@ -17,9 +17,11 @@ module.exports = {
   },
   plugins: ['vue', '@typescript-eslint', 'html'],
   rules: {
+    camelcase: 'off',
     'no-console': 'off',
     'no-shadow': 'off',
     'no-param-reassign': 'off',
+    'no-restricted-syntax': 'off',
     'import/no-unresolved': 'off',
     'import/prefer-default-export': 'off',
     'import/extensions': 'off',

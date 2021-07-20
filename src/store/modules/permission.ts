@@ -1,45 +1,68 @@
 import { Module, MutationTree, ActionTree } from 'vuex'
 import { RouteRecordRaw } from 'vue-router'
-import path from 'path'
-import store, { IRootState } from '../index'
-import { asyncRoutes } from '../../router/index'
-import { MenuData } from './menu'
+// import path from 'path'
+import { routes } from '@/router'
+import { IRootState } from '../index'
+import { Role } from './user'
+// import { MenuData } from './menu'
 
 // 生成路由路径数组
-const generateRoutePaths = (menus: Array<MenuData>): string[] => {
-  return menus.map((menu) => menu.path)
-}
+// const generateRoutePaths = (menus: Array<MenuData>): string[] => {
+//   return menus.map((menu) => menu.path)
+// }
 // 白名单
-const whiteList = ['/:pathMatch(.*)*']
+// const whiteList = ['/:pathMatch(.*)*']
 // 生成可访问路由表
-const generateRoutes = (routes: Array<RouteRecordRaw>, routePaths: string[], basePath = '/') => {
-  const routerData: Array<RouteRecordRaw> = []
+// const generateRoutes = (routes: Array<RouteRecordRaw>, routePaths: string[], basePath = '/') => {
+//   const routerData: Array<RouteRecordRaw> = []
+//   routes.forEach((route) => {
+//     const routePath = path.resolve(basePath, route.path)
+
+//     if (route.children) {
+//       // 先看子路由 是否有匹配上的路由
+//       route.children = generateRoutes(route.children, routePaths, routePath)
+//     }
+
+//     // 如果当前路由子路由 数量大于0有匹配上 或 paths中包含当面路由path 就需要把当前父路由添加上
+//     if (
+//       routePaths.includes(routePath) ||
+//       (route.children && route.children.length >= 1) ||
+//       whiteList.includes(routePath)
+//     ) {
+//       routerData.push(route)
+//     }
+//   })
+//   return routerData
+// }
+
+// const filterAsyncRoutes = (menus: Array<MenuData>, routes: Array<RouteRecordRaw>) => {
+//   // 生成要匹配的路由path数组
+//   const routePaths = generateRoutePaths(menus)
+//   // 生成匹配path的路由表
+//   const routerList = generateRoutes(routes, routePaths)
+//   return routerList
+// }
+
+function hasPermission(roles: Array<Role>, route: RouteRecordRaw) {
+  if (route.meta && route.meta.roles) {
+    return roles.some((role) => (route.meta as any).roles.includes(role))
+  }
+  return true
+}
+
+export function filterAsyncRoutes(routes: Array<RouteRecordRaw>, roles: Array<Role>) {
+  const res: Array<RouteRecordRaw> = []
+
   routes.forEach((route) => {
-    const routePath = path.resolve(basePath, route.path)
-
-    if (route.children) {
-      // 先看子路由 是否有匹配上的路由
-      route.children = generateRoutes(route.children, routePaths, routePath)
-    }
-
-    // 如果当前路由子路由 数量大于0有匹配上 或 paths中包含当面路由path 就需要把当前父路由添加上
-    if (
-      routePaths.includes(routePath) ||
-      (route.children && route.children.length >= 1) ||
-      whiteList.includes(routePath)
-    ) {
-      routerData.push(route)
+    const tmp: RouteRecordRaw = { ...route }
+    if (hasPermission(roles, tmp)) {
+      if (tmp.children) {
+        tmp.children = filterAsyncRoutes(tmp.children, roles)
+      }
+      res.push(tmp)
     }
   })
-  return routerData
-}
-
-const filterAsyncRoutes = (menus: Array<MenuData>, routes: Array<RouteRecordRaw>) => {
-  // 生成要匹配的路由path数组
-  const routePaths = generateRoutePaths(menus)
-  // 生成匹配path的路由表
-  const routerList = generateRoutes(routes, routePaths)
-  return routerList
+  return res
 }
 
 // 定义state类型
@@ -72,28 +95,19 @@ const mutations: IMutations = {
 
 // 定义actions
 const actions: IActions = {
-  generateRoutes({ dispatch }, type?: number) {
-    // 1 针对菜单排序更新
-    return new Promise((resolve, reject) => {
+  generateRoutes({ commit }, roles) {
+    return new Promise((resolve) => {
       let accessedRoutes: Array<RouteRecordRaw> = []
-      if (store.getters.roleNames.includes('super_admin')) {
+      if (roles.includes('admin')) {
         // 超级管理员角色
-        accessedRoutes = asyncRoutes
-        dispatch('menu/getAllMenuListByAdmin', null, { root: true })
+        accessedRoutes = routes
         resolve(accessedRoutes)
       } else {
-        // 根据角色过滤菜单
-        const roles = store.getters.roleIds
-        dispatch('menu/getAccessByRoles', roles, { root: true })
-          .then((menus) => {
-            if (type !== 1) {
-              // 菜单重新排序 不需要再过次滤路由
-              accessedRoutes = filterAsyncRoutes(menus, asyncRoutes)
-            }
-            resolve(accessedRoutes)
-          })
-          .catch(reject)
+        accessedRoutes = filterAsyncRoutes(routes, roles)
+        commit('SET_ROUTES', accessedRoutes)
       }
+      commit('SET_ROUTES', accessedRoutes)
+      resolve(accessedRoutes)
     })
   }
 }
