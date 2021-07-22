@@ -65,6 +65,7 @@ export default defineComponent({
   display: flex;
   width: 100%;
   height: 100%;
+  background: #f7f8fa;
   .main-container {
     flex: 1;
     display: flex;

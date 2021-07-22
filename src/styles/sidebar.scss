@@ -18,7 +18,8 @@
     bottom: 0;
     left: 0;
     z-index: 1001;
-    box-shadow: 2px 0px 10px 0px rgba(0, 0, 0, 0.5);
+    // box-shadow: 2px 0px 10px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 1px 0px 0px 0px #EBEDF0;
     // overflow: hidden;
 
     // reset element-ui css
@@ -28,7 +29,7 @@
 
     .scrollbar-wrapper {
       overflow-x: hidden !important;
-      box-shadow: 0px 0px 8px 2px rgba(223, 223, 223, 0.3);
+      // box-shadow: 0px 0px 8px 2px rgba(223, 223, 223, 0.3);
     }
 
     .el-scrollbar__bar.is-vertical {
@@ -57,7 +58,6 @@
 
     .svg-icon {
       margin-right: 16px;
-      color: $blue;
     }
 
     .sub-el-icon {
@@ -76,15 +76,15 @@
     .el-submenu__title {
       // border-top: 1px solid $subMenuBorder;
       &:hover {
-        @include gradientBgColor
-        // background-color: $menuHover !important;
+        // @include gradientBgColor
+        background-color: $menuHover !important;
       }
     }
 
     .is-active>.el-submenu__title {
       color: $subMenuActiveText !important;
       .svg-icon {
-        color: #fff;
+        color: $blue;
       }
     }
 
@@ -92,10 +92,15 @@
     & .el-submenu .el-menu-item {
       min-width: $sideBarWidth !important;
       background-color: $subMenuBg !important;
-
+      color: $subMenuText !important;
+      padding-left: 65px !important;
       &:hover {
-        @include gradientBgColor
-        // background-color: $subMenuHover !important;
+        // @include gradientBgColor
+        background-color: $subMenuHover !important;
+      }
+      &.is-active {
+        background-color: $subMenuHover !important;
+        color: $blue !important;
       }
     }
   }
@@ -210,8 +215,8 @@
   .el-menu-item {
     &:hover {
       // you can use $subMenuHover
-      @include gradientBgColor
-      // background-color: $menuHover !important;
+      // @include gradientBgColor
+      background-color: $menuHover !important;
     }
   }
 

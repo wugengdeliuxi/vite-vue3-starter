@@ -7,23 +7,28 @@ $green: #30B08F;
 $tiffany: #4AB7BD;
 $yellow:#FEC171;
 $panGreen: #30B08F;
+$wordcolor1: #2b3642; // 主要用于标题类
+$wordcolor2: #333; // 用于副标题and正文
+$wordcolor3: #424754; // 用于正文
+$wordcolor4: #999999; // 用于非常浅色文字
 
 // sidebar
-$menuText:#bfcbd9;
-$menuActiveText:#409EFF;
-$subMenuActiveText:#f4f4f5; // https://github.com/ElemeFE/element/issues/12951
+$menuText:#000;
+$menuActiveText:#000;
+$subMenuActiveText:#000; // https://github.com/ElemeFE/element/issues/12951
 
-$menuBg:#304156;
-$menuHover:#263445;
+$menuBg:#fff;
+$menuHover:rgba(49, 82, 239, 0.04);
 
-$subMenuBg:#1f2d3d;
-$subMenuHover:#001528;
+$subMenuBg:#fff;
+$subMenuHover:rgba(49, 82, 239, 0.04);
+$subMenuText: #666;
 
-$sideBarWidth: 240px;
+$sideBarWidth: 220px;
 // settingPanel宽度
 $settingPanelWidth: 260px;
 // 默认主题色
-$theme: #409EFF;
+$theme: #3152EF;
 // The :export directive is the magic sauce for webpack
 // https://mattferderer.com/use-sass-variables-in-typescript-and-javascript
 :export {

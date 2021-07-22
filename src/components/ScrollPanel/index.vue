@@ -1,5 +1,5 @@
 <template>
-  <el-scrollbar wrap-class="scroll-wrapper">
+  <el-scrollbar wrap-class="scrollbar-wrapper">
     <slot />
   </el-scrollbar>
 </template>

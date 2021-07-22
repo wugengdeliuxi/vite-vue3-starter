@@ -3,11 +3,11 @@
     <transition name="sidebarLogoFade">
       <!-- sidebar收起状态下 -->
       <router-link v-if="collapse" key="collapse" to="/" class="sidebar-logo-link">
-        <img v-if="logo" :src="logo" class="sidebar-logo" alt="VueElementAdmin" />
-        <h1 v-else class="sidebar-title">{{ title }}</h1>
+        <svg-icon name="logo" class="sidebar-logo"></svg-icon>
+        <!-- <h1 class="sidebar-title">{{ title }}</h1> -->
       </router-link>
       <router-link v-else key="expand" to="/" class="sidebar-logo-link">
-        <img v-if="logo" :src="logo" class="sidebar-logo" alt="VueElementAdmin" />
+        <svg-icon name="logo"></svg-icon>
         <h1 class="sidebar-title">{{ title }}</h1>
       </router-link>
     </transition>
@@ -16,9 +16,11 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import SvgIcon from '@/components/SvgIcon/index.vue'
 
 export default defineComponent({
   name: 'Logo',
+  components: { SvgIcon },
   props: {
     collapse: {
       type: Boolean,
@@ -27,9 +29,7 @@ export default defineComponent({
   },
   setup() {
     return {
-      title: '案件接入子系统',
-      logo: ''
-      // logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
+      title: '案件接入子系统'
     }
   }
 })
@@ -50,7 +50,7 @@ export default defineComponent({
   width: 100%;
   height: 50px;
   line-height: 50px;
-  background: #304156;
+  background: #fff;
   text-align: center;
   overflow: hidden;
 
@@ -75,11 +75,16 @@ export default defineComponent({
       vertical-align: middle;
       margin-right: 12px;
     }
-
+    .svg-icon {
+      width: 20px;
+      height: 20px;
+      line-height: 50px;
+      vertical-align: middle;
+    }
     & .sidebar-title {
       display: inline-block;
       margin: 0;
-      color: #fff;
+      color: #000;
       font-weight: 600;
       line-height: 50px;
       font-size: 18px;

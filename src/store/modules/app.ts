@@ -38,7 +38,7 @@ const app: Module<IAppState, IRootState> = {
     sidebar: {
       opened: true
     },
-    size: 'medium'
+    size: 'mini'
   },
   mutations,
   actions

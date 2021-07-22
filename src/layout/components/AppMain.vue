@@ -36,6 +36,7 @@ export default defineComponent({
 .app-main {
   /* navbar 50px  */
   min-height: calc(100vh - 50px);
+  padding: 0 16px;
 }
 
 .fade-transform-enter-active,

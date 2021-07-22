@@ -2,11 +2,11 @@ import viteSvgIcons from 'vite-plugin-svg-icons'
 import path, { resolve } from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-
 import styleImport from 'vite-plugin-style-import'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '', // 设置打包路径
   plugins: [
     vue(),
     // 按需载入 Element Plus
@@ -46,7 +46,6 @@ export default defineConfig({
       }
     }
   },
-  base: './', // 设置打包路径
   server: {
     port: 4000, // 设置服务启动端口号
     open: false, // 设置服务启动时是否自动打开浏览器

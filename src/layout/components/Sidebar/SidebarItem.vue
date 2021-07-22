@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts">
-// import path from 'path'
+// import { resolve } from 'path'
 import { defineComponent, PropType, computed, toRefs } from 'vue'
 import { isExternal } from '@/utils/validate'
 import { RouteRecordRaw } from 'vue-router'
@@ -119,8 +119,12 @@ export default defineComponent({
         return childPath
       }
       // 如果不是外链 需要和basePath拼接
-      return props.basePath + childPath
-      // return path.resolve(props.basePath, childPath)
+      if (props.basePath !== '/') {
+        return `${props.basePath}/${childPath}`.replace(/\/$/, '')
+      }
+      // return `${props.basePath}/${childPath}`
+      return (props.basePath + childPath).replace(/\/$/, '')
+      // return resolve(props.basePath, childPath)
     }
 
     // 设置 alwaysShow: true，这样它就会忽略上面定义的规则，一直显示根路由 哪怕只有一个子路由也会显示为嵌套的路由菜单
