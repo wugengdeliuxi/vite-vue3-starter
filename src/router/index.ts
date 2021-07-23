@@ -4,12 +4,13 @@ import Layout from '@/layout/index.vue'
 export const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect: '/table',
+    redirect: '/access',
     component: Layout,
     meta: {
       title: '基础表单',
       icon: 'access',
-      alwaysShow: true
+      alwaysShow: true,
+      hidden: true
     },
     children: [
       {

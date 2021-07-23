@@ -9,7 +9,7 @@
       </div>
     </slot>
     <el-table
-      ref="table"
+      ref="tableRef"
       :header-cell-class-name="headercolor"
       :max-height="tableHeight"
       size="medium"
@@ -96,7 +96,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted, PropType } from 'vue'
+import { defineComponent, onMounted, ref, PropType, onActivated, onUnmounted, nextTick } from 'vue'
 import useListenerResize from './useListenerResize'
 import useTableHeight from './useTableHeight'
 
@@ -146,20 +146,36 @@ export default defineComponent({
     // 是否需要操作按钮
     hasButtons: {
       type: Boolean,
-      default: true
+      default: false
     }
   },
   emits: ['handleSizeChange', 'handleCurrentChange'],
   setup(props, { emit }) {
     const innerHeight = ref(0)
+    const tableRef = ref(null)
 
     const { tableHeight, tableContainerHeight } = useTableHeight(props, innerHeight)
-    console.log(tableHeight)
 
-    const { listenerResize } = useListenerResize()
+    const { listenerResize } = useListenerResize(innerHeight)
+
+    window.addEventListener('resize', listenerResize)
+    onUnmounted(() => {
+      window.removeEventListener('resize', listenerResize)
+    })
 
     onMounted(() => {
-      listenerResize()
+      if (!props.height) {
+        nextTick(() => {
+          listenerResize()
+        })
+      }
+    })
+
+    onActivated(() => {
+      ;(tableRef.value as any).doLayout()
+      nextTick(() => {
+        listenerResize()
+      })
     })
 
     const sizeChange = (size: number) => {
@@ -173,7 +189,8 @@ export default defineComponent({
       tableHeight,
       tableContainerHeight,
       sizeChange,
-      currentChange
+      currentChange,
+      tableRef
     }
   }
 })
@@ -181,9 +198,9 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .global-table {
-  padding: 24px 16px 28px 16px;
+  padding: 16px 16px 28px 16px;
   background: #fff;
-  box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.08);
+  // box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.08);
   .buttons {
     margin-bottom: 20px;
     text-align: left;
@@ -196,8 +213,8 @@ export default defineComponent({
   width: 100%;
   box-sizing: border-box;
 }
-// .global-table .headercolor {
-// @include themeBgRgba(0.1);
-// color: $wordcolor3;
-// }
+.global-table .headercolor {
+  background: #f7f8fa;
+  color: #323233;
+}
 </style>

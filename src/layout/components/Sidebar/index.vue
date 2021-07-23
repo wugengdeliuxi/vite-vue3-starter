@@ -13,7 +13,7 @@
         :text-color="scssVariables.menuText"
         :active-text-color="themeColor"
         :collapse="isCollapse"
-        :collapse-transition="true"
+        :collapse-transition="false"
       >
         <sidebar-item
           v-for="route in menuRoutes"

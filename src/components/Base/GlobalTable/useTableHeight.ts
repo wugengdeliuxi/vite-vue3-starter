@@ -1,7 +1,7 @@
 import { computed, Ref } from 'vue'
-import { tableProps } from './types'
+import { TableProps } from './types'
 
-export default function useTableHeight(props: tableProps, innerHeight: Ref<number>) {
+export default function useTableHeight(props: TableProps, innerHeight: Ref<number>) {
   const tableHeight = computed(() => {
     const { height } = props
     if (height) {
@@ -10,14 +10,12 @@ export default function useTableHeight(props: tableProps, innerHeight: Ref<numbe
         if (customHeight.endsWith('px')) {
           customHeight = parseFloat(customHeight)
         }
-      }
-      if (typeof customHeight === 'number') {
+      } else {
         return customHeight
       }
       return customHeight
     }
-    console.log(innerHeight)
-    return innerHeight
+    return innerHeight.value
   })
 
   const tableContainerHeight = computed(() => {

@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <!-- <hambuger  @toggleClick="toggleSidebar" :is-active="sidebar.opened"/> -->
+    <hambuger @toggleClick="toggleSidebar" :is-active="sidebar.opened" />
     <!-- <breadcrumb /> -->
     <div class="right-menu">
       <!-- 设置 -->
@@ -22,7 +22,7 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
 // import Breadcrumb from '@/components/Breadcrumb/index.vue'
-// import Hambuger from '@/components/Hambuger/index.vue'
+import Hambuger from '@/components/Hambuger/index.vue'
 import { useStore } from '@/store/index'
 // import Screenfull from '@/components/Screenfull/index.vue'
 // import SizeSelect from '@/components/SizeSelect/index.vue'
@@ -32,7 +32,7 @@ export default defineComponent({
   name: 'Navbar',
   components: {
     // Breadcrumb,
-    // Hambuger,
+    Hambuger,
     // Screenfull,
     // SizeSelect,
     Avatar

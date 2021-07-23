@@ -1,5 +1,5 @@
 <template>
-  <div class="app-wrapper">
+  <div :class="classObj" class="app-wrapper">
     <div class="sidebar-container">
       <Sidebar />
     </div>
@@ -50,11 +50,19 @@ export default defineComponent({
     // const showTagsView = computed(() => store.state.settings.tagsView)
     const showTagsView = computed(() => store.state.settings.tagsView)
 
+    const classObj = computed(() => {
+      return {
+        hideSidebar: !store.getters.sidebar.opened,
+        openSidebar: store.getters.sidebar.opened
+      }
+    })
+
     return {
       showSetting,
       openSetting,
       showTagsView,
-      SettingsPanelWidth: varibalse.settingPanelWidth
+      SettingsPanelWidth: varibalse.settingPanelWidth,
+      classObj
     }
   }
 })

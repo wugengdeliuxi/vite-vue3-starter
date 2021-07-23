@@ -1,6 +1,6 @@
 <template>
   <div class="table">
-    <global-search>
+    <global-search title="接入点列表">
       <template #operate>
         搜索：
         <el-input
@@ -20,7 +20,7 @@
       v-loading="loading"
       :columns="columns"
       :data="tableData"
-      :pagination="false"
+      :pagination="true"
     >
       <template v-slot:buttons>
         <div class="buttons">
@@ -32,13 +32,31 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref, toRefs } from 'vue'
+import { defineComponent, reactive, ref, toRefs, unref } from 'vue'
 
 export default defineComponent({
   name: 'Table',
   setup() {
-    const columns = ref([])
-    const tableData = ref([])
+    const columns = unref([
+      { prop: 'id', label: '场景名称' },
+      { prop: 'source1', label: '渠道名称' },
+      { prop: 'source2', label: '场景自有名称' },
+      { prop: 'source3', label: 'TOKEN' }
+    ])
+    const tableData = ref([
+      { id: 1, source1: 1, source2: 1, source3: 1 },
+      { id: 1, source1: 1, source2: 1, source3: 1 },
+      { id: 1, source1: 1, source2: 1, source3: 1 },
+      { id: 1, source1: 1, source2: 1, source3: 1 },
+      { id: 1, source1: 1, source2: 1, source3: 1 },
+      { id: 1, source1: 1, source2: 1, source3: 1 },
+      { id: 1, source1: 1, source2: 1, source3: 1 },
+      { id: 1, source1: 1, source2: 1, source3: 1 },
+      { id: 1, source1: 1, source2: 1, source3: 1 },
+      { id: 1, source1: 1, source2: 1, source3: 1 },
+      { id: 1, source1: 1, source2: 1, source3: 1 },
+      { id: 1, source1: 1, source2: 1, source3: 1 }
+    ])
     const loading = ref(false)
     const searchState = reactive({
       searchForm: {
